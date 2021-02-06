@@ -18,7 +18,7 @@ const CreateQuestionsTable = () => {
 
     const query = `
     CREATE TABLE questions (
-        questionID INT PRIMARY KEY,
+        questionID VARCHAR (10) PRIMARY KEY,
         itemName VARCHAR (100) NOT NULL,
         questionText VARCHAR (1000),
         postTime TIMESTAMP,
@@ -49,9 +49,9 @@ const CreateAnswersTable = () => {
 
     const query = `
     CREATE TABLE answers (
-        answerID INT PRIMARY KEY,
-        questionID INT NOT NULL,
-        itemName VARCHAR (100) NOT NULL,
+        answerID VARCHAR (10) PRIMARY KEY,
+        questionID VARCHAR (10),
+        itemName VARCHAR (100),
         answerUsername VARCHAR (30),
         answerText VARCHAR (1000),
         postTime TIMESTAMP,
@@ -71,17 +71,17 @@ const CreateAnswersTable = () => {
 
 const SeedAll = () => {
     answerCounter = 0;
-    recordsToCreate = 1000;
-    for (let i = 0; i < recordsToCreate; i++) {
+    recordsToCreate = 100000;
+    for (let i = 1; i <= recordsToCreate; i++) {
         //Start by creating question, then hold onto questionID/itemName to create 0-3 answers
 
         numAnswers = RandomNumber(3);
 
-        const questionQuery = `
+        var questionQuery = `
         INSERT INTO questions
         (questionID, itemName, questionText, postTime, posterUsername, numAnswers, topAnswerID)
         VALUES
-        (${i}, 'itemName${i}', '${questionText}', current_timestamp, 
+        ('q${i}', 'itemName${i}', '${questionText}', current_timestamp, 
         '${RandomMember(username)}', ${numAnswers}, ${answerCounter})
         `;
 
@@ -90,7 +90,7 @@ const SeedAll = () => {
                 console.log(err);
                 return;
             }
-        });
+        })
 
         // Question has been created
         // Now create associated answers
@@ -102,7 +102,7 @@ const SeedAll = () => {
             INSERT INTO answers
             (answerID, questionID, itemName, answerUsername, answerText, postTime, yesHelpful, noHelpful)
             VALUES
-            (${answerCounter}, ${i}, 'itemName${i}', '${RandomMember(username)}', 
+            ('a${answerCounter}', 'q${i}${j}', 'itemName${i}', '${RandomMember(username)}', 
             '${RandomMember(answerText)}', current_timestamp, ${RandomNumber(10)}, ${RandomNumber(10)})`;
 
             client.query(answerQuery, (err, res) => {

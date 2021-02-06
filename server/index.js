@@ -11,8 +11,6 @@ app.use(bp.json());
 app.use(cors());
 app.use(bp.urlencoded({extended: true}));
 
-const SeedDatabase = require('../database/seed.js');
-
 app.get('/', (req, res) => {
     console.log('request recieved');
     res.end();
