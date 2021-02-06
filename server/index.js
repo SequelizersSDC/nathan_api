@@ -15,7 +15,6 @@ const SeedDatabase = require('../database/seed.js');
 
 app.get('/', (req, res) => {
     console.log('request recieved');
-    SeedDatabase();
     res.end();
 })
 

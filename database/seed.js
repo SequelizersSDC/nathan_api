@@ -1,4 +1,4 @@
-const client = require('./index.js').client;
+const client = require('./index.js');
 
 const SeedDatabase = () => {
     CreateQuestionsTable();
@@ -71,7 +71,7 @@ const CreateAnswersTable = () => {
 
 const SeedAll = () => {
     answerCounter = 0;
-    recordsToCreate = 100;
+    recordsToCreate = 1000;
     for (let i = 0; i < recordsToCreate; i++) {
         //Start by creating question, then hold onto questionID/itemName to create 0-3 answers
 
@@ -96,14 +96,14 @@ const SeedAll = () => {
         // Now create associated answers
 
         for (let j = 0; j < numAnswers; j++) {
-            const answerQuery = `
+            answerCounter++;
+
+            var answerQuery = `
             INSERT INTO answers
             (answerID, questionID, itemName, answerUsername, answerText, postTime, yesHelpful, noHelpful)
             VALUES
             (${answerCounter}, ${i}, 'itemName${i}', '${RandomMember(username)}', 
             '${RandomMember(answerText)}', current_timestamp, ${RandomNumber(10)}, ${RandomNumber(10)})`;
-
-            answerCounter++;
 
             client.query(answerQuery, (err, res) => {
                 if (err) {
@@ -117,8 +117,6 @@ const SeedAll = () => {
 
     console.log(`Database successfully seeded with ${recordsToCreate} questions and ${answerCounter} answers.`)
 }
-
-module.exports = SeedDatabase;
 
 // Sample information to pull from below:
 
@@ -140,3 +138,7 @@ function RandomMember(array) {
 function RandomNumber(max) {
     return Math.floor(Math.random() * Math.floor(max)) || 1;
 };
+
+
+module.exports = SeedDatabase;
+SeedDatabase();
