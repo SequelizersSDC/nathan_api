@@ -11,9 +11,11 @@ app.use(bp.json());
 app.use(cors());
 app.use(bp.urlencoded({extended: true}));
 
+const speedTest = require('../database/index.js').speedTest;
+
 app.get('/', (req, res) => {
-    console.log('request recieved');
-    res.end();
+    console.log('Request recieved.');
+    speedTest(req, res);
 })
 
 app.listen(port, () => {
