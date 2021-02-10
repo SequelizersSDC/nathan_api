@@ -18,6 +18,7 @@ const speedTest = (req, res) => {
             return;
         }
         var after = Date.now();
+        console.log(success.rows);
         res.send(`${after - before}ms \n ${JSON.stringify(success.rows)}`);
         res.end();
     });
