@@ -24,7 +24,7 @@ SCHEMA="$DIR/schema.sql"
 PGPASSWORD='password' psql -U $USER < schema.sql
 
 ### Run Our Generator Script ###
-node database/seedQuestions.js --output=$FILEPATH --lines=10000000
+node database/seedQuestions.js --output=$FILEPATH --lines=1000000
 
 Table="questions"
 
@@ -38,7 +38,7 @@ Table="answers"
 LINES=${1:-1000000}
 
 ### Run answer generator Script
-node database/seedAnswers.js --output=$AnswerPath --lines=10000000
+node database/seedAnswers.js --output=$AnswerPath --lines=1000000
 
 #Import csv to database
 PGPASSWORD='password' psql -U $USER -d $DATABASE -c "COPY $Table FROM '$AnswerPath' CSV HEADER";

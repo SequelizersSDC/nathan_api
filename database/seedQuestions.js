@@ -29,7 +29,7 @@ const createQuestion = () => {
   var postTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   var posterUsername = RandomMember(username);
   var numAnswers = RandomNumber(4);
-  var topAnswerID = RandomNumber(10000000);
+  var topAnswerID = RandomNumber(1000000);
 
   return `${questionID},${itemName},${questionText},${postTime},${posterUsername},${numAnswers},${topAnswerID}\n`;
 }

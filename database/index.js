@@ -9,7 +9,7 @@ const client = new Client({
 });
 
 const speedTest = (req, res) => {
-    var randomEntryID = Math.floor(Math.random() * Math.floor(10000000));
+    var randomEntryID = Math.floor(Math.random() * Math.floor(1000000));
     var before = Date.now();
     client.query(`select * from questions where questionid = 'q${randomEntryID}';`, (err, success) => {
         if (err) {

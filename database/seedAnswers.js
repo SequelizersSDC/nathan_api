@@ -19,7 +19,7 @@ function RandomNumber(max) {
 };
 
 const createAnswer = () => {
-  var questionCounter = RandomNumber(10000000);
+  var questionCounter = RandomNumber(1000000);
   var answerText = [
     'Lorem ipsum dolor sit amet vim at viderer lobortis eos ubique interesset suscipiantur in. In est omnis disputando at vis utinam hendrerit eloquentiam. At utroque persequeris vix. Ne ignota semper iriure qui modus gloriatur abhorreant ei usu',
     'Id eos odio diam nonumy pro at vero minimum commune. Vim ei essent aliquid oportere te dicunt aeterno corrumpit cum sint gloriatur usu ea. Decore periculis complectitur eu per mel eripuit mediocritatem eu eos at latine volumus reformidans. At purto oportere cum.',
