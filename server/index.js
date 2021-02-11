@@ -14,8 +14,9 @@ app.use(bp.urlencoded({extended: true}));
 const speedTest = require('../database/index.js').speedTest;
 
 app.get('/', (req, res) => {
+    var receivedAt = Date.now();
     console.log('Request recieved.');
-    speedTest(req, res);
+    speedTest(req, res, receivedAt);
 })
 
 app.listen(port, () => {

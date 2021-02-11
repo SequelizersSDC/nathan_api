@@ -8,7 +8,7 @@ const client = new Client({
     password: 'password'
 });
 
-const speedTest = (req, res) => {
+const speedTest = (req, res, receivedAt) => {
     var randomEntryID = Math.floor(Math.random() * Math.floor(1000000));
     var before = Date.now();
     client.query(`select * from questions where questionid = 'q${randomEntryID}';`, (err, success) => {
@@ -19,7 +19,7 @@ const speedTest = (req, res) => {
         }
         var after = Date.now();
         console.log(success.rows);
-        res.send(`${after - before}ms \n ${JSON.stringify(success.rows)}`);
+        res.send(`Query time: ${after - before}ms \n Request time: ${after - receivedAt}ms ${JSON.stringify(success.rows)}`);
         res.end();
     });
 };
